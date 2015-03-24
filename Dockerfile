@@ -33,10 +33,12 @@ USER $EJABBERD_USER
 
 RUN wget -q -O /tmp/ejabberd-installer.run "http://www.process-one.net/downloads/downloads-action.php?file=/ejabberd/$EJABBERD_VERSION/ejabberd-$EJABBERD_VERSION-linux-armhf-installer.run" \
     && chmod +x /tmp/ejabberd-installer.run \
+    && cd /opt \
     && /tmp/ejabberd-installer.run \
-            --mode unattended \
+#            --mode unattended \
             --prefix $EJABBERD_ROOT \
             --adminpw ejabberd \
+    && ln -s $EJABBERD_ROOT-$EJABBERD_VERSION $EJABBERD_ROOT \
     && rm -rf /tmp/* \
     && mkdir $EJABBERD_ROOT/ssl \
     && rm -rf $EJABBERD_ROOT/database/ejabberd@localhost
