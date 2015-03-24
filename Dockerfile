@@ -25,6 +25,7 @@ RUN apt-get update \
         python2.7 \
         python-jinja2 \
         ca-certificates \
+        libyaml-0-2 \
     && rm -rf /var/lib/apt/lists/*
 
 # Install as user
