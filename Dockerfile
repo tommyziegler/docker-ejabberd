@@ -1,4 +1,4 @@
-FROM debian:7
+FROM resin/rpi-raspbian:wheezy
 MAINTAINER Rafael Römhild <rafael@roemhild.de>
 
 ENV EJABBERD_VERSION 15.03
@@ -30,7 +30,8 @@ RUN apt-get update \
 USER $EJABBERD_USER
 
 # Install ejabberd
-RUN wget -q -O /tmp/ejabberd-installer.run "http://www.process-one.net/downloads/downloads-action.php?file=/ejabberd/$EJABBERD_VERSION/ejabberd-$EJABBERD_VERSION-linux-x86_64-installer.run" \
+
+RUN wget -q -O /tmp/ejabberd-installer.run "http://www.process-one.net/downloads/downloads-action.php?file=/ejabberd/$EJABBERD_VERSION/ejabberd-$EJABBERD_VERSION-linux-armhf-installer.run" \
     && chmod +x /tmp/ejabberd-installer.run \
     && /tmp/ejabberd-installer.run \
             --mode unattended \
