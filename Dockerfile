@@ -43,6 +43,8 @@ RUN wget -q -O /tmp/ejabberd-installer.run "http://www.process-one.net/downloads
     && mkdir $EJABBERD_ROOT/ssl \
     && rm -rf $EJABBERD_ROOT/database/ejabberd@localhost
 
+RUN rm -rf /tmp/*
+
 # Make config
 COPY ejabberd.yml.tpl $EJABBERD_ROOT/conf/ejabberd.yml.tpl
 COPY ejabberdctl.cfg.tpl $EJABBERD_ROOT/conf/ejabberdctl.cfg.tpl
