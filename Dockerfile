@@ -3,7 +3,8 @@ MAINTAINER Tommy Ziegler <me@tommyziegler.com>
 
 ENV EJABBERD_VERSION 15.03
 ENV EJABBERD_USER ejabberd
-ENV EJABBERD_ROOT /opt/ejabberd
+ENV EJABBERD_HOME /opt/ejabberd
+ENV EJABBERD_ROOT /opt/ejabberd/ejabberd-$EJABBERD_VERSION
 ENV HOME $EJABBERD_ROOT
 ENV PATH $EJABBERD_ROOT/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV DEBIAN_FRONTEND noninteractive
@@ -13,7 +14,7 @@ ENV XMPP_DOMAIN localhost
 RUN groupadd -r $EJABBERD_USER \
     && useradd -r -m \
        -g $EJABBERD_USER \
-       -d $EJABBERD_ROOT \
+       -d $EJABBERD_HOME \
        -s /usr/sbin/nologin \
        $EJABBERD_USER
 
@@ -33,16 +34,10 @@ USER $EJABBERD_USER
 
 RUN wget -q -O /tmp/ejabberd-installer.run "http://www.process-one.net/downloads/downloads-action.php?file=/ejabberd/$EJABBERD_VERSION/ejabberd-$EJABBERD_VERSION-linux-armhf-installer.run" \
     && chmod +x /tmp/ejabberd-installer.run \
-    && cd $EJABBERD_ROOT \
-    && mkdir _tmp \
-    && cd _tmp \
     && /tmp/ejabberd-installer.run \
 #            --mode unattended \
             --prefix $EJABBERD_ROOT \
             --adminpw ejabberd \
-    && cd .. \
-    && cp -r $EJABBERD_ROOT/_tmp/ejabberd-$EJABBERD_VERSION/* $EJABBERD_ROOT \
-    && rm -rf $EJABBERD_ROOT/_tmp \
     && rm -rf /tmp/* \
     && mkdir $EJABBERD_ROOT/ssl \
     && rm -rf $EJABBERD_ROOT/database/ejabberd@localhost
