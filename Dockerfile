@@ -1,5 +1,5 @@
 FROM resin/rpi-raspbian:wheezy
-MAINTAINER Rafael Römhild <rafael@roemhild.de>
+MAINTAINER Tommy Ziegler <me@tommyziegler.com>
 
 ENV EJABBERD_VERSION 15.03
 ENV EJABBERD_USER ejabberd
