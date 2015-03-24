@@ -64,13 +64,13 @@ listen:
     ## register: true
     captcha: true
     tls: true
-    certfile: "/opt/ejabberd/ssl/host.pem"
+    certfile: "/opt/ejabberd/ejabberd-15.03/ssl/host.pem"
 
 ###   SERVER TO SERVER
 ###   ================
 
 s2s_use_starttls: required
-s2s_certfile: "/opt/ejabberd/ssl/host.pem"
+s2s_certfile: "/opt/ejabberd/ejabberd-15.03/ssl/host.pem"
 s2s_protocol_options:
   - "no_sslv3"
   - "no_tlsv1"
@@ -222,6 +222,6 @@ modules:
 host_config:
 {%- for xmpp_domain in env['XMPP_DOMAIN'].split() %}
   "{{ xmpp_domain }}":
-    domain_certfile: "/opt/ejabberd/ssl/{{ xmpp_domain }}.pem"
+    domain_certfile: "/opt/ejabberd/ejabberd-15.03/ssl/{{ xmpp_domain }}.pem"
 {%- endfor %}
 
