@@ -1,9 +1,9 @@
-FROM resin/rpi-raspbian:wheezy
+FROM resin/rpi-raspbian:latest
 MAINTAINER Tommy Ziegler <me@tommyziegler.com>
 
 ENV EJABBERD_VERSION 15.03
 ENV EJABBERD_USER ejabberd
-ENV EJABBERD_ROOT /opt/ejabberd
+ENV EJABBERD_ROOT /opt/ejabberd-$EJABBERD_VERSION
 ENV HOME $EJABBERD_ROOT
 ENV PATH $EJABBERD_ROOT/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV DEBIAN_FRONTEND noninteractive
@@ -38,7 +38,6 @@ RUN wget -q -O /tmp/ejabberd-installer.run "http://www.process-one.net/downloads
 #            --mode unattended \
             --prefix $EJABBERD_ROOT \
             --adminpw ejabberd \
-    && ln -s $EJABBERD_ROOT-$EJABBERD_VERSION $EJABBERD_ROOT \
     && rm -rf /tmp/* \
     && mkdir $EJABBERD_ROOT/ssl \
     && rm -rf $EJABBERD_ROOT/database/ejabberd@localhost
