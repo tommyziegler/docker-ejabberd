@@ -31,8 +31,8 @@ RUN apt-get update \
 USER $EJABBERD_USER
 
 # Install ejabberd
-
 RUN wget -q -O /tmp/ejabberd-installer.run "http://www.process-one.net/downloads/downloads-action.php?file=/ejabberd/$EJABBERD_VERSION/ejabberd-$EJABBERD_VERSION-linux-armhf-installer.run" \
+    && cd $EJABBERD_HOME
     && chmod +x /tmp/ejabberd-installer.run \
     && /tmp/ejabberd-installer.run \
 #            --mode unattended \
